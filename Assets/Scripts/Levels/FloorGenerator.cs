@@ -30,7 +30,7 @@ public class FloorGenerator : MonoBehaviour
         var currentRoom = Resources.Load($"{Global.Paths.Rooms1}StartingRoom_{Level}") as GameObject;
         for (var i = 0; i < rooms; i++)
         {
-            currentRoom.GetComponent();
+            //currentRoom.GetComponent();
         }
     }
 }
