@@ -9,6 +9,6 @@ namespace Player.Items
 
         void MainAction();
         void AdditionalAction();
-        void PasiveAction();
+        void PasiveAction(float dt);
     }
 }

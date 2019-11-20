@@ -37,6 +37,7 @@ namespace Player
         private void Keyboard()
         {
             PlayerMovement();
+            _playerActions.PasiveAction(Time.deltaTime);
 #if UNITY_EDITOR
             ProgressEditorUtilities();
 #endif

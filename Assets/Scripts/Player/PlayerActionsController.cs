@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Player.Items;
 using UnityEngine;
 
@@ -47,6 +48,12 @@ namespace Player
                 AdditionalMouseAction();
                 _additionalCooldown = additionalMouseCooldown;
             }
+        }
+
+        public void PasiveAction(float dt)
+        {
+            RightHand.PasiveAction(dt);
+            LeftHand.PasiveAction(dt);
         }
         private void Cooldown()
         {
