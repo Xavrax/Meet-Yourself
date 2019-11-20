@@ -11,7 +11,7 @@ namespace Player
         public Action AdditionalMouseAction { get; private set; } = () => { };
         void Start()
         {
-            MainMouseAction = () => { Debug.Log("Test!"); };
+            
         }
 
         // Update is called once per frame
@@ -50,8 +50,8 @@ namespace Player
             }
         }
 
-        private float _mainCooldown = 0f;
-        private float _additionalCooldown = 0f;
+        private float _mainCooldown;
+        private float _additionalCooldown;
 
     }
 }
