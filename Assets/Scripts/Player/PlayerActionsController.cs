@@ -1,4 +1,5 @@
 using System;
+using Player.Items;
 using UnityEngine;
 
 namespace Player
@@ -7,11 +8,21 @@ namespace Player
     {
         public float mainMouseCooldown = 1f;
         public float additionalMouseCooldown = 5f;
+        
+        public float MainMouseCooldown => 
+            mainMouseCooldown * RightHand.MainCooldown * LeftHand.MainCooldown;
+
+        public float AdditionalMouseCooldown =>
+            additionalMouseCooldown * RightHand.AdditionalCooldown * LeftHand.AdditionalCooldown;
+        
+        public IEqItem RightHand { get; set; }
+        public IEqItem LeftHand { get; set; }
         public Action MainMouseAction { get; private set; } = () => { };
         public Action AdditionalMouseAction { get; private set; } = () => { };
         void Start()
         {
-            
+            RightHand = new NoItem();
+            LeftHand = new NoItem();
         }
 
         // Update is called once per frame
@@ -25,7 +36,7 @@ namespace Player
             if (_mainCooldown <= 0f)
             {
                 MainMouseAction();
-                _mainCooldown = mainMouseCooldown;
+                _mainCooldown = MainMouseCooldown;
             }
         }
 
