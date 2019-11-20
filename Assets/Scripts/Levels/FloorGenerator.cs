@@ -85,27 +85,45 @@ public class FloorGenerator : MonoBehaviour
             var door = doors
                     .OrderBy(d => _rng.Next())
                     .FirstOrDefault();
+
+            if (door == null)
+            {
+                Debug.LogError("Doors not found!");
+                return;
+            }
                 
             door.SetActive(false);
             
-            var room = Instantiate(
-                AssetDatabase.LoadAssetAtPath<GameObject>(
-                    _rooms
-                        .OrderBy(r => _rng.Next())
-                        .First()),
+            Instantiate(
+                AssetDatabase.LoadAssetAtPath<GameObject>($"{Global.Paths.SceneNodes}Door.prefab"),
                 door.transform.position,
                 door.transform.rotation,
-                transform
+                door.transform.parent
             );
-
-            if (room == null)
-            {
-                Debug.LogError("Cannon initialize next room!");
-                return;
-            }
             
-            _floor.Add(room);
-            currentRoom = room;
+            Destroy(door);
+            return;
+
+
+
+//            var room = Instantiate(
+//                AssetDatabase.LoadAssetAtPath<GameObject>(
+//                    _rooms
+//                        .OrderBy(r => _rng.Next())
+//                        .First()),
+//                door.transform.position,
+//                door.transform.rotation,
+//                transform
+//            );
+//
+//            if (room == null)
+//            {
+//                Debug.LogError("Cannon initialize next room!");
+//                return;
+//            }
+//            
+//            _floor.Add(room);
+//            currentRoom = room;
 
         }
     }
