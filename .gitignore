@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 # Rider generated files
 .idea/
+
+# Meta generated files
+*.meta
