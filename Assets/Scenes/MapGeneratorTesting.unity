@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wall: {fileID: 4417078817748846330, guid: 6d2986052e28a722ca4d89273ee22a51, type: 3}
   doors: {fileID: 8476530331191097981, guid: 36d6562d30350a89987d98bce14558a5, type: 3}
+  seed: 0
 --- !u!4 &646030938
 Transform:
   m_ObjectHideFlags: 0
