@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9410222a35a94f059dfca2a310a36f55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapGenerator: {fileID: 0}
+  mapGenerator: {fileID: 646030937}
   level: 1
 --- !u!1 &1783034016
 GameObject:
