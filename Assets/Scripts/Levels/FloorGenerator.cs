@@ -102,28 +102,25 @@ public class FloorGenerator : MonoBehaviour
             );
             
             Destroy(door);
-            return;
 
+            var room = Instantiate(
+                AssetDatabase.LoadAssetAtPath<GameObject>(
+                    _rooms
+                        .OrderBy(r => _rng.Next())
+                        .First()),
+                door.transform.position,
+                door.transform.rotation,
+                transform
+            );
 
-
-//            var room = Instantiate(
-//                AssetDatabase.LoadAssetAtPath<GameObject>(
-//                    _rooms
-//                        .OrderBy(r => _rng.Next())
-//                        .First()),
-//                door.transform.position,
-//                door.transform.rotation,
-//                transform
-//            );
-//
-//            if (room == null)
-//            {
-//                Debug.LogError("Cannon initialize next room!");
-//                return;
-//            }
-//            
-//            _floor.Add(room);
-//            currentRoom = room;
+            if (room == null)
+            {
+                Debug.LogError("Cannon initialize next room!");
+                return;
+            }
+            
+            _floor.Add(room);
+            currentRoom = room;
 
         }
     }
