@@ -5,6 +5,6 @@ namespace Global
 {
     public static class Paths
     {
-        public const string Rooms1 = "Prefabs/Levels/Level1/";
+        public const string Rooms1 = "Assets/Prefabs/Levels/Level1/";
     }
 }

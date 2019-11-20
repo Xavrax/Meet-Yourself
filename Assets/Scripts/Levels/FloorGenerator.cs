@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
 
@@ -14,9 +16,13 @@ public class FloorGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _floor = new List<GameObject>();
         _rng = seed == 0 ? new Random() : new Random(seed);
         Level = 1;
-        _rooms = Resources.LoadAll(Global.Paths.Rooms1) as GameObject[];
+        _rooms = Directory
+            .GetFiles(Global.Paths.Rooms1)
+            .Where(name => !name.EndsWith(".meta"))
+            .ToArray();
     }
 
     // Update is called once per frame
@@ -32,11 +38,13 @@ public class FloorGenerator : MonoBehaviour
         var roomIndex = 0;
         
         var currentRoom = Instantiate(
-            Resources.Load($"{Global.Paths.Rooms1}StartingRoom_{Level}"),
+            AssetDatabase.LoadAssetAtPath<GameObject>($"{Global.Paths.Rooms1}StartingRoom_{Level}.prefab"),
             new Vector3(0, 0, 0),
-            Quaternion.identity, 
+            Quaternion.identity,
             transform
-        ) as GameObject;
+        );
+        
+        _floor.Add(currentRoom);
 
         if (currentRoom == null)
         {
@@ -50,13 +58,12 @@ public class FloorGenerator : MonoBehaviour
             
             foreach (var child in currentRoom.transform.Find("Doors"))
             {
-                var go = child as GameObject;
-                
+                var go = (child as Transform)?.gameObject;
+
                 if (go == null)
                 {
                     continue;
                 }
-                
                 if (go.name.Contains("DoorSlot"))
                 {
                     doors.Add(go);                    
@@ -76,26 +83,34 @@ public class FloorGenerator : MonoBehaviour
             }
 
             var door = doors
-                    .Where(d => d.name.Contains())
                     .OrderBy(d => _rng.Next())
                     .FirstOrDefault();
                 
             door.SetActive(false);
-            Instantiate(
-                _rooms
-                    .OrderBy(r => _rng.Next())
-                    .First(),
+            
+            var room = Instantiate(
+                AssetDatabase.LoadAssetAtPath<GameObject>(
+                    _rooms
+                        .OrderBy(r => _rng.Next())
+                        .First()),
                 door.transform.position,
                 door.transform.rotation,
                 transform
             );
-            
 
+            if (room == null)
+            {
+                Debug.LogError("Cannon initialize next room!");
+                return;
+            }
+            
+            _floor.Add(room);
+            currentRoom = room;
 
         }
     }
     
     private Random _rng;
-    private GameObject[] _rooms;
+    private string[] _rooms;
     private List<GameObject> _floor;
 }
