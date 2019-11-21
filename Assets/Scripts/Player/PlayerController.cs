@@ -1,4 +1,5 @@
 ﻿using System;
+using Player.Items;
 using PlayerTesting;
 using UnityEngine;
 
@@ -23,8 +24,12 @@ namespace Player
         {
             _playerActions = GetComponent(typeof(PlayerActionsController)) as PlayerActionsController;
             characterControler = GetComponent<CharacterController>();
+            _rightHand = transform.Find("Main Camera").Find("RightHand").gameObject;
+            _leftHand = transform.Find("Main Camera").Find("LeftHand").gameObject;
+            
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
         }
 
         // Update is called once per frame
@@ -32,6 +37,14 @@ namespace Player
         {
             Keyboard();
             Mouse();
+            if (_rightHand.transform.childCount > 0)
+            {
+                var component = _rightHand.transform.GetChild(0).GetComponent<IEqItem>();
+                if (_playerActions.RightHand != component)
+                {
+                    _playerActions.RightHand = component;
+                }
+            }
         }
 
         private void Keyboard()
@@ -104,5 +117,7 @@ namespace Player
 #endif
 
         private PlayerActionsController _playerActions;
+        private GameObject _rightHand;
+        private GameObject _leftHand;
     }
 }

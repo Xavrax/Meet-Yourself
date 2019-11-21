@@ -6,9 +6,10 @@ namespace Player.Items
         float AdditionalCooldown { get; }
         float MainForceValue { get; }
         float AdditionalForceValue { get; }
+        float ShotSpeed { get; }
 
-        void MainAction();
-        void AdditionalAction();
+        void MainAction(PlayerActionsController playerActions);
+        void AdditionalAction(PlayerActionsController playerActions);
         void PasiveAction(float dt);
     }
 }

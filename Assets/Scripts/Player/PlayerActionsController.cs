@@ -9,17 +9,19 @@ namespace Player
     {
         public float mainMouseCooldown = 1f;
         public float additionalMouseCooldown = 5f;
+        public float shotSpeed = 10f;
         
         public float MainMouseCooldown => 
             mainMouseCooldown * RightHand.MainCooldown * LeftHand.MainCooldown;
 
         public float AdditionalMouseCooldown =>
             additionalMouseCooldown * RightHand.AdditionalCooldown * LeftHand.AdditionalCooldown;
+
+        public float ShotSpeed =>
+            shotSpeed * RightHand.ShotSpeed * LeftHand.ShotSpeed;
         
         public IEqItem RightHand { get; set; }
         public IEqItem LeftHand { get; set; }
-        public Action MainMouseAction { get; private set; } = () => { };
-        public Action AdditionalMouseAction { get; private set; } = () => { };
         void Start()
         {
             RightHand = new NoItem();
@@ -36,7 +38,7 @@ namespace Player
         {
             if (_mainCooldown <= 0f)
             {
-                MainMouseAction();
+                RightHand.MainAction(this);
                 _mainCooldown = MainMouseCooldown;
             }
         }
@@ -45,7 +47,7 @@ namespace Player
         {
             if (_additionalCooldown <= 0f)
             {
-                AdditionalMouseAction();
+                RightHand.AdditionalAction(this);
                 _additionalCooldown = additionalMouseCooldown;
             }
         }

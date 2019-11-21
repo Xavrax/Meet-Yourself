@@ -6,13 +6,14 @@ namespace Player.Items
         public float AdditionalCooldown { get; } = 1f;
         public float MainForceValue { get; } = 1f;
         public float AdditionalForceValue { get; } = 1f;
+        public float ShotSpeed { get; } = 1f;
         
-        public void MainAction()
+        public void MainAction(PlayerActionsController playerActions)
         {
             // do nothing
         }
 
-        public void AdditionalAction()
+        public void AdditionalAction(PlayerActionsController playerActions)
         {
             // do nothing
         }
