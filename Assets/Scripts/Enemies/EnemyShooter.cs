@@ -12,7 +12,7 @@ namespace Enemies
         public GameObject bulletsContainer;
         public GameObject projectile;
         
-        public override float Health { get; set; } = 10f;
+        public override float Health { get; set; } = 30f;
         public override float Speed { get; set; } = 2f;
         public override float Damage { get; set; } = 10f;
         public override float ShotSpeed { get; set; } = 8f;

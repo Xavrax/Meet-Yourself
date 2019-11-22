@@ -18,7 +18,7 @@ namespace Player.Items
         
         public void MainAction(PlayerActionsController playerActions)
         {
-            Shoot(playerActions).ShooterTag = "PlayerBullet";
+            Shoot(playerActions).ShooterTag = "Player";
         }
 
         public void AdditionalAction(PlayerActionsController playerActions)

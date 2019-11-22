@@ -15,7 +15,7 @@ namespace Enemies
 
         protected void Update()
         {
-            if (Health < 0f)
+            if (Health <= 0f)
             {
                 Destroy(gameObject);
             }
@@ -35,7 +35,6 @@ namespace Enemies
                 Debug.LogError("Bullet is not a Bullet!");
                 return;
             }
-            
             Health -= bullet.HurtValue;
         }
     }
