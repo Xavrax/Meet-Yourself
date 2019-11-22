@@ -5,6 +5,12 @@ namespace Player.Items
     public class Bullet : MonoBehaviour, IBullet
     {
         public string ShooterTag { get; set; }
+
+        private void Start()
+        {
+            tag = ShooterTag == "Player" ? "PlayerBullet" : "EnemyBullet";
+        }
+
         void Update()
         {
             _lifeTime += Time.deltaTime;
@@ -17,7 +23,7 @@ namespace Player.Items
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag(ShooterTag) && !Pircing)
+            if (!other.CompareTag(ShooterTag) && !other.CompareTag(tag) && !Pircing)
             {     
                 Destroy(gameObject);                
             }

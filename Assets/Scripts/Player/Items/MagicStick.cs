@@ -26,7 +26,7 @@ namespace Player.Items
             var shots = 100;
             for (var i = 0; i < shots; i++)
             {
-                Shoot(playerActions).ShooterTag = "PlayerBullet";              
+                Shoot(playerActions).ShooterTag = "Player";              
                 playerCamera.transform.Rotate(0, 3.6f, 0);
             }
         }
