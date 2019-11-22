@@ -4,7 +4,7 @@ namespace Player.Items
 {
     public class Bullet : MonoBehaviour, IBullet
     {
-
+        public string ShooterTag { get; set; }
         void Update()
         {
             _lifeTime += Time.deltaTime;
@@ -15,10 +15,12 @@ namespace Player.Items
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter(Collider other)
         {
-            Destroy(gameObject);
-            Destroy(other.gameObject);
+            if (!other.CompareTag(ShooterTag) && !Pircing)
+            {     
+                Destroy(gameObject);                
+            }
         }
 
         private float _lifeTime = 0f;
