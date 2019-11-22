@@ -10,6 +10,7 @@ namespace Player
         public float mainMouseCooldown = 1f;
         public float additionalMouseCooldown = 5f;
         public float shotSpeed = 10f;
+        public float damage = 10f;
         
         public float MainMouseCooldown => 
             mainMouseCooldown * RightHand.MainCooldown * LeftHand.MainCooldown;
@@ -19,6 +20,9 @@ namespace Player
 
         public float ShotSpeed =>
             shotSpeed * RightHand.ShotSpeed * LeftHand.ShotSpeed;
+
+        public float Damage =>
+            damage * RightHand.MainForceValue * LeftHand.MainForceValue;
         
         public IEqItem RightHand { get; set; }
         public IEqItem LeftHand { get; set; }

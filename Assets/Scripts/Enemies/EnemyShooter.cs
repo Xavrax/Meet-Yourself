@@ -5,17 +5,17 @@ using Random = System.Random;
 
 namespace Enemies
 {
-    public class EnemyShooter : MonoBehaviour, IEnemy
+    public class EnemyShooter : AEnemy
     {
         public GameObject player;
         public GameObject playerCamera;
         public GameObject bulletsContainer;
         public GameObject projectile;
         
-        public float Health { get; set; } = 10f;
-        public float Speed { get; set; } = 2f;
-        public float Damage { get; set; } = 10f;
-        public float ShotSpeed { get; set; } = 8f;
+        public override float Health { get; set; } = 10f;
+        public override float Speed { get; set; } = 2f;
+        public override float Damage { get; set; } = 10f;
+        public override float ShotSpeed { get; set; } = 8f;
         
         private void Start()
         {
@@ -27,8 +27,9 @@ namespace Enemies
             _actualCooldown = CalculateCooldown();
         }
 
-        private void Update()
+        private new void Update()
         {
+            base.Update();
             _actualCooldown -= Time.deltaTime;
             if (_actualCooldown < 0f)
             {
@@ -37,13 +38,13 @@ namespace Enemies
             MoveAction();
         }
 
-        public void AtackAction()
+        public override void AtackAction()
         {
             Shoot();
             _actualCooldown = CalculateCooldown();
         }
 
-        public void MoveAction()
+        public override void MoveAction()
         {
             transform.position += (_desiredPosition - transform.position) * Speed * Time.deltaTime;
             transform.LookAt(playerCamera.transform);

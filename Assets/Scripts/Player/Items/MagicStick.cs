@@ -46,7 +46,9 @@ namespace Player.Items
             );
             
             bullet.GetComponent<Rigidbody>().velocity = playerCamera.transform.TransformDirection(new Vector3(0f, 0f,playerActions.ShotSpeed));
-            bullet.GetComponent<Bullet>().ExistanceTime = 2f;
+            var bulletStats = bullet.GetComponent<Bullet>();
+            bulletStats.ExistanceTime = 2f;
+            bulletStats.HurtValue = playerActions.Damage;
 
             return bullet.GetComponent<Bullet>();
         }
