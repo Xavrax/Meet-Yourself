@@ -24,24 +24,13 @@ namespace Enemies
             bulletsContainer = GameObject.Find("Bullets");
             _rng = new Random();
             _desiredPosition = transform.position;
-            _actualCooldown = CalculateCooldown();
-        }
-
-        private new void Update()
-        {
-            base.Update();
-            _actualCooldown -= Time.deltaTime;
-            if (_actualCooldown < 0f)
-            {
-                AtackAction();
-            }
-            MoveAction();
+            ActualCooldown = CalculateCooldown();
         }
 
         public override void AtackAction()
         {
             Shoot();
-            _actualCooldown = CalculateCooldown();
+            ActualCooldown = CalculateCooldown();
         }
 
         public override void MoveAction()
@@ -82,7 +71,6 @@ namespace Enemies
             bulletStats.ShooterTag = "Enemy";
         }
         
-        private float _actualCooldown = 0f;
         private Random _rng;
         private Vector3 _desiredPosition;
     }

@@ -19,9 +19,20 @@ namespace Enemies
             {
                 Destroy(gameObject);
             }
+            
+            if (ActualCooldown < 0f)
+            {
+                AtackAction();
+            }
+            else
+            {
+                ActualCooldown -= Time.deltaTime;
+            }
+            
+            MoveAction();
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("PlayerBullet"))
             {
@@ -37,5 +48,7 @@ namespace Enemies
             }
             Health -= bullet.HurtValue;
         }
+        
+        protected float ActualCooldown = 0f;
     }
 }
