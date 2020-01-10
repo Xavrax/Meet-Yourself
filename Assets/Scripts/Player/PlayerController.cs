@@ -19,6 +19,7 @@ namespace Player
         public float mouseUpDown = 0.0f;
         public float mouseUpDownRange = 90.0f;
 
+
         void Start()
         {
             _playerActions = GetComponent(typeof(PlayerActionsController)) as PlayerActionsController;
@@ -33,18 +34,31 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
-            Keyboard();
-            Mouse();
-            if (_rightHand.transform.childCount > 0)
+            if (_isAlive)
             {
-                var component = _rightHand.transform.GetChild(0).GetComponent<IEqItem>();
-                if (_playerActions.RightHand != component)
+                Keyboard();
+                Mouse();
+                if (_rightHand.transform.childCount > 0)
                 {
-                    _playerActions.RightHand = component;
-                }
+                    var component = _rightHand.transform.GetChild(0).GetComponent<IEqItem>();
+                    if (_playerActions.RightHand != component)
+                    {
+                        _playerActions.RightHand = component;
+                    }
+                }    
             }
         }
 
+        public void Die()
+        {
+            if (_isAlive)
+            {
+                transform.Rotate(new Vector3(0, 0, 90f));
+                GetComponent<Rigidbody>().useGravity = false;
+                _isAlive = false;
+            }
+        }
+        
         private void Keyboard()
         {
             PlayerMovement();
@@ -125,5 +139,6 @@ namespace Player
         private PlayerActionsController _playerActions;
         private GameObject _rightHand;
         private GameObject _leftHand;
+        private bool _isAlive = true;
     }
 }

@@ -7,6 +7,11 @@ namespace Player
     {
         public float Health = 100f;
 
+        void Start()
+        {
+            _playerController = GetComponent<PlayerController>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("EnemyBullet"))
@@ -27,11 +32,15 @@ namespace Player
 
         private void CheckIfLoseCondition()
         {
-            if (Health <= 0f)
+            if (Health > 0f)
             {
-                Debug.Log("You Lose!");
-                // todo: Lose State
+                return;
             }
+            
+            Debug.Log("You Lose!");
+            _playerController.Die();
         }
+
+        private PlayerController _playerController;
     }
 }
