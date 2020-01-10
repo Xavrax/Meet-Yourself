@@ -8,7 +8,6 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-
         public CharacterController characterControler;
         public GameObject playerCamera;
 
@@ -26,10 +25,9 @@ namespace Player
             characterControler = GetComponent<CharacterController>();
             _rightHand = transform.Find("Main Camera").Find("RightHand").gameObject;
             _leftHand = transform.Find("Main Camera").Find("LeftHand").gameObject;
-            
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            
         }
 
         // Update is called once per frame
@@ -53,12 +51,13 @@ namespace Player
             _playerActions.PasiveAction(Time.deltaTime);
 #if UNITY_EDITOR
             ProgressEditorUtilities();
+#else
+            ExitGameInput();
 #endif
         }
 
         private void Mouse()
         {
-
             var mouseRightLeft = Input.GetAxis("Mouse X") * mouseSensitivity;
             transform.Rotate(0, mouseRightLeft, 0);
             mouseUpDown -= Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -113,6 +112,13 @@ namespace Player
                     : CursorLockMode.Locked;
                 Cursor.visible = !Cursor.visible;
             }
+        }
+#else
+        private void ExitGameInput() {
+              if (Input.GetKeyDown(KeyCode.Escape))
+              {
+                    Application.Quit();
+              }
         }
 #endif
 
