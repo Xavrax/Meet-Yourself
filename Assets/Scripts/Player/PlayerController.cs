@@ -2,6 +2,7 @@
 using Player.Items;
 using PlayerTesting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Player
@@ -56,6 +57,9 @@ namespace Player
                 transform.Rotate(new Vector3(0, 0, 90f));
                 GetComponent<Rigidbody>().useGravity = false;
                 _isAlive = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                SceneManager.LoadScene("YouLoseScene", LoadSceneMode.Additive);
             }
         }
         
